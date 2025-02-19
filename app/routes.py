@@ -1,5 +1,6 @@
-from flask import Blueprint, request, jsonify
-from app.services import cosmosdb, azure_openai, redis_cache
+from flask import Blueprint, request, jsonify, current_app
+from app.services import azure_openai
+from app.services.azure_openai import AzureOpenAIService
 
 bp = Blueprint('main', __name__)
 
@@ -12,12 +13,16 @@ def process_text():
         return jsonify({'error': 'No text input provided'}), 400
 
     # Store input in CosmosDB
-    cosmosdb.store_input(text_input)
+    current_app.cosmosdb_service.store_input({'id': 'some_unique_id', 'text': text_input})
 
     # Call Azure OpenAI assistant API
-    response = azure_openai.call_openai(text_input)
+    openai_service = AzureOpenAIService(
+        endpoint=current_app.config['AZURE_OPENAI_ENDPOINT'],
+        api_key=current_app.config['AZURE_OPENAI_API_KEY']
+    )
+    response = openai_service.call_openai(text_input)
 
     # Store result in Azure Cache for Redis
-    redis_cache.store_result(text_input, response)
+    current_app.redis_cache_service.store_result(text_input, response)
 
     return jsonify({'response': response}), 200

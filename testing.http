@@ -1,0 +1,7 @@
+### POST request to /process endpoint
+POST http://localhost:5000/process
+Content-Type: application/json
+
+{
+    "text": "What does a bard do?"
+}
