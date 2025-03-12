@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "eastus2"
+    },
+    "acrName": {
+      "value": "samplecontainerregistry"
+    },
+    "containerAppEnvName": {
+      "value": "jmg12032025-test-flask-app-container-env"
+    },
+    "containerAppName": {
+      "value": "jmg12032025-test-flask-app"
+    },
+    "imageName": {
+      "value": "busybox"
+    },
+    "cpuCore": {
+      "value": "0.5"
+    },
+    "memorySize": {
+      "value": "1.0Gi"
+    },
+    "minReplicas": {
+      "value": 1
+    },
+    "maxReplicas": {
+      "value": 3
+    },
+    "targetPort": {
+      "value": 80
+    }
+  }
+}
