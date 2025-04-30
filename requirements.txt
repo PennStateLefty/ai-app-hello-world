@@ -1,6 +1,6 @@
 Flask>=2.3.0
 azure-cosmos==4.2.0
-redis==4.3.4
+redis==4.4.4
 openai>=1.63.2
 flask-cors==3.0.10
 python-dotenv==0.20.0
